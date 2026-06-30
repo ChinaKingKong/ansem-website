@@ -977,6 +977,589 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .risk__grid {
     grid-template-columns: 1fr;
   }
+
+  /* Token Identity */
+  .identity__grid {
+    grid-template-columns: 1fr;
+  }
+  .identity-card--wide {
+    grid-column: span 1;
+  }
+
+  /* Price History */
+  .price__milestones {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+  .price__milestones::before {
+    display: none;
+  }
+  .price-milestone {
+    padding-top: 0;
+  }
+  .price-milestone__dot {
+    display: none;
+  }
+  .price__stats-row {
+    gap: var(--space-6);
+  }
+
+  /* Liquidity */
+  .liquidity__insight {
+    flex-direction: column;
+  }
+
+  /* Risk Score */
+  .risk__score {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  /* Diligence */
+  .diligence-item {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+}
+
+/* ============================================
+   TOKEN IDENTITY
+   ============================================ */
+.identity__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+
+.identity-card {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  padding: var(--space-6);
+  transition: border-color var(--duration-fast);
+}
+.identity-card:hover {
+  border-color: oklch(70% 0.16 82 / 0.3);
+}
+.identity-card--wide {
+  grid-column: span 2;
+}
+
+.identity-card__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: oklch(70% 0.16 82 / 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  margin-bottom: var(--space-4);
+}
+
+.identity-card__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-2);
+}
+
+.identity-card__value {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-1);
+  line-height: 1.3;
+}
+.identity-card__value--mono {
+  font-family: 'DM Sans', monospace;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  word-break: break-all;
+  color: var(--color-accent);
+}
+
+.identity-card__sub {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.identity-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+  margin-top: var(--space-2);
+  transition: opacity var(--duration-fast);
+}
+.identity-card__link:hover {
+  opacity: 0.8;
+}
+
+.identity__note {
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  background: oklch(70% 0.16 82 / 0.04);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 8px 8px 0;
+}
+.identity__note-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+.identity__note p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* ============================================
+   TOKENOMICS — Supply Distribution
+   ============================================ */
+.section__subheading {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: var(--space-16) 0 var(--space-8);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metric-card__sub {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+.supply__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.supply-bar__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.supply-bar__pct {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.supply-bar__track {
+  height: 12px;
+  background: var(--color-bg-raised);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: var(--space-2);
+}
+
+.supply-bar__fill {
+  height: 100%;
+  border-radius: 6px;
+  width: var(--bar-width);
+  transition: width 1s ease;
+}
+.supply-bar__fill--danger {
+  background: oklch(48% 0.18 25);
+}
+.supply-bar__fill--warn {
+  background: oklch(55% 0.12 65);
+}
+.supply-bar__fill--neutral {
+  background: var(--color-accent-muted);
+}
+
+.supply-bar__desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.tokenomics__note {
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  background: oklch(70% 0.16 82 / 0.04);
+  border-radius: 8px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+/* ============================================
+   LIQUIDITY TABLE
+   ============================================ */
+.liquidity__table-wrap {
+  margin-top: var(--space-10);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+}
+
+.liquidity-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+  min-width: 600px;
+}
+
+.liquidity-table thead {
+  background: var(--color-bg-elevated);
+}
+
+.liquidity-table th {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding: var(--space-4) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.liquidity-table td {
+  padding: var(--space-4);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid oklch(25% 0.005 84 / 0.4);
+}
+
+.liquidity-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.liquidity-table tbody tr:hover {
+  background: oklch(70% 0.16 82 / 0.02);
+}
+
+.liquidity-table__platform {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: 0.04em;
+}
+
+.liquidity-table__danger {
+  color: var(--color-danger-light);
+  font-weight: 600;
+}
+
+.liquidity-table__warn {
+  color: oklch(55% 0.12 65);
+  font-weight: 600;
+}
+
+.liquidity-table__muted {
+  color: var(--color-text-muted);
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.tag--dex { background: oklch(55% 0.12 65 / 0.15); color: oklch(60% 0.12 65); }
+.tag--cex { background: oklch(70% 0.16 82 / 0.1); color: var(--color-accent); }
+.tag--agg { background: oklch(55% 0.12 260 / 0.12); color: oklch(60% 0.1 260); }
+
+.liquidity__insight {
+  display: flex;
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  background: oklch(48% 0.18 25 / 0.08);
+  border: 1px solid oklch(48% 0.18 25 / 0.2);
+  border-radius: 12px;
+  align-items: flex-start;
+}
+
+.liquidity__insight-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: oklch(48% 0.18 25 / 0.2);
+  color: var(--color-danger-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  font-family: var(--font-display);
+}
+
+.liquidity__insight-title {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-danger-light);
+  margin-bottom: var(--space-1);
+}
+
+.liquidity__insight-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* ============================================
+   PRICE HISTORY
+   ============================================ */
+.price__milestones {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-10);
+  position: relative;
+}
+
+.price__milestones::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(to right, oklch(48% 0.18 25), oklch(70% 0.16 82), oklch(48% 0.18 25));
+  border-radius: 1px;
+}
+
+.price-milestone {
+  text-align: center;
+  position: relative;
+  padding-top: 46px;
+}
+
+.price-milestone__date {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+  text-transform: uppercase;
+}
+
+.price-milestone__price {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.price-milestone__price--up {
+  color: var(--color-accent);
+  font-size: var(--font-size-lg);
+}
+.price-milestone__price--ath {
+  color: var(--color-accent-light);
+  font-size: var(--font-size-lg);
+}
+.price-milestone__price--down {
+  color: var(--color-danger-light);
+}
+
+.price-milestone__label {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.price-milestone__dot {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: var(--color-bg-elevated);
+  border: 2px solid var(--color-text-muted);
+  border-radius: 50%;
+  z-index: 1;
+}
+.price-milestone__dot--peak {
+  border-color: var(--color-accent);
+  background: var(--color-accent-muted);
+  width: 20px;
+  height: 20px;
+  top: 22px;
+}
+.price-milestone__dot--ath {
+  border-color: var(--color-accent-light);
+  background: var(--color-accent);
+  width: 24px;
+  height: 24px;
+  top: 20px;
+  box-shadow: 0 0 16px oklch(70% 0.16 82 / 0.3);
+}
+.price-milestone__dot--bottom {
+  border-color: var(--color-danger-light);
+  background: var(--color-bg-elevated);
+}
+
+.price__stats-row {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-12);
+  margin-top: var(--space-12);
+  flex-wrap: wrap;
+}
+
+.price-stat {
+  text-align: center;
+}
+
+.price-stat__value {
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.price-stat__label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ============================================
+   RISK SCORE
+   ============================================ */
+.risk__score {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.risk__score-badge {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--color-danger-light);
+  line-height: 0.9;
+}
+.risk__score-badge span {
+  font-size: 1.5rem;
+  color: var(--color-text-muted);
+}
+
+.risk__score-label {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-danger-light);
+}
+
+.risk-card__num {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: oklch(70% 0.16 82 / 0.15);
+  margin-bottom: var(--space-2);
+}
+
+/* ============================================
+   DUE DILIGENCE
+   ============================================ */
+.diligence {
+  background: var(--color-bg-surface);
+}
+
+.diligence__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-top: var(--space-10);
+}
+
+.diligence-item {
+  display: flex;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-6);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  transition: border-color var(--duration-fast);
+}
+.diligence-item:hover {
+  border-color: oklch(70% 0.16 82 / 0.2);
+}
+
+.diligence-item__check {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: oklch(70% 0.16 82 / 0.08);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.diligence-item__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-1);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.diligence-item__desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.diligence-item__link {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.diligence-item__link:hover {
+  opacity: 0.8;
 }
 
 /* ============================================
@@ -1148,7 +1731,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
       <li role="none"><a href="#what-is" class="nav__link" role="menuitem">What Is</a></li>
       <li role="none"><a href="#the-name" class="nav__link" role="menuitem">The Name</a></li>
       <li role="none"><a href="#story" class="nav__link" role="menuitem">Story</a></li>
-      <li role="none"><a href="#tokenomics" class="nav__link" role="menuitem">Tokenomics</a></li>
+      <li role="none"><a href="#token-identity" class="nav__link" role="menuitem">Identity</a></li>
+      <li role="none"><a href="#tokenomics" class="nav__link" role="menuitem">Supply</a></li>
+      <li role="none"><a href="#liquidity" class="nav__link" role="menuitem">Liquidity</a></li>
       <li role="none"><a href="#risk" class="nav__link" role="menuitem">Risk</a></li>
       <li role="none"><a href="#community" class="nav__link nav__cta" role="menuitem">Buy $ANSEM</a></li>
     </ul>
@@ -1186,16 +1771,16 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
         </div>
         <div class="hero__stats reveal reveal--delay-4">
           <div>
-            <div class="hero__stat-value">$80M+</div>
+            <div class="hero__stat-value">$120M</div>
             <div class="hero__stat-label">Peak Market Cap</div>
           </div>
           <div>
-            <div class="hero__stat-value">$60M+</div>
+            <div class="hero__stat-value">$61M</div>
             <div class="hero__stat-label">24h Volume</div>
           </div>
           <div>
-            <div class="hero__stat-value">600x</div>
-            <div class="hero__stat-label">Peak Growth</div>
+            <div class="hero__stat-value">1054x</div>
+            <div class="hero__stat-label">ATH vs ATL</div>
           </div>
         </div>
       </div>
@@ -1251,6 +1836,72 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   </div>
 </section>
 
+<section class="section token-identity" id="token-identity" aria-labelledby="token-identity-title">
+  <div class="container">
+    <span class="section__label">The Asset</span>
+    <h2 id="token-identity-title" class="section__title">Token<br>Identity</h2>
+    <p class="section__body">
+      $ANSEM is a pure Solana memecoin with no utility, no roadmap, and no official team. Here are the facts on-chain.
+    </p>
+
+    <div class="identity__grid stagger-children">
+      <div class="identity-card">
+        <div class="identity-card__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <h3 class="identity-card__title">Token Name</h3>
+        <p class="identity-card__value">The Black Bull</p>
+        <p class="identity-card__sub">Symbol: <strong>$ANSEM</strong></p>
+      </div>
+      <div class="identity-card">
+        <div class="identity-card__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3 class="identity-card__title">Network</h3>
+        <p class="identity-card__value">Solana</p>
+        <p class="identity-card__sub">SPL Token Standard</p>
+      </div>
+      <div class="identity-card identity-card--wide">
+        <div class="identity-card__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="9" x2="22" y2="9"/></svg>
+        </div>
+        <h3 class="identity-card__title">Mint Address</h3>
+        <p class="identity-card__value identity-card__value--mono">9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump</p>
+        <a href="https://solscan.io/token/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" class="identity-card__link" target="_blank" rel="noopener">View on Solscan &nearr;</a>
+      </div>
+      <div class="identity-card">
+        <div class="identity-card__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3 class="identity-card__title">Genesis</h3>
+        <p class="identity-card__value">Jun 16, 2026</p>
+        <p class="identity-card__sub">Created via Pump.fun</p>
+      </div>
+      <div class="identity-card">
+        <div class="identity-card__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </div>
+        <h3 class="identity-card__title">Type</h3>
+        <p class="identity-card__value">Memecoin</p>
+        <p class="identity-card__sub">No utility · No roadmap</p>
+      </div>
+      <div class="identity-card">
+        <div class="identity-card__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        </div>
+        <h3 class="identity-card__title">Team</h3>
+        <p class="identity-card__value">Anonymous</p>
+        <p class="identity-card__sub">Community-driven</p>
+      </div>
+    </div>
+
+    <div class="identity__note reveal">
+      <div class="identity__note-title">Official Statement</div>
+      <p>The project's official website (blackbullsol.com) explicitly states the token is "community-built, high-risk" and has <strong>no affiliation with Ansem</strong>. There is no whitepaper, no roadmap, and no disclosed team. All narrative value is community-generated.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============================================
      THE NAME
      ============================================ -->
@@ -1282,31 +1933,31 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <section class="section narrative" id="story" aria-labelledby="story-title">
   <div class="container">
     <span class="section__label">The Rise</span>
-    <h2 id="story-title" class="section__title">Why It<br>Exploded 600x</h2>
+    <h2 id="story-title" class="section__title">Why It<br>Exploded 1054x</h2>
     <p class="section__body">
-      Understanding $ANSEM means understanding the perfect storm of Solana meme culture, celebrity narrative, and liquidity cascades that turned a pump.fun launch into a cultural phenomenon.
+      Understanding $ANSEM means understanding the perfect storm of Solana meme culture, celebrity narrative, and liquidity cascades that turned a Pump.fun launch into a cultural phenomenon in just two weeks.
     </p>
 
     <div class="narrative__timeline stagger-children" id="timeline">
       <div class="timeline-item">
-        <div class="timeline-item__phase">Wave 1</div>
-        <h3 class="timeline-item__title">Pump.fun Launch</h3>
-        <p class="timeline-item__desc">Launched during Solana's meme coin seasonal explosion. Sniper bots and early liquidity rushed in. A standard meme coin birth — but this one had a name that stuck.</p>
+        <div class="timeline-item__phase">Jun 16</div>
+        <h3 class="timeline-item__title">Pump.fun Genesis</h3>
+        <p class="timeline-item__desc">Created on Solana via Pump.fun by an anonymous developer. The creator bought 792M tokens for ~$6,300, then transferred 650M to Ansem's public wallet. The remaining 142M was sold for ~$11,800 in profit.</p>
       </div>
       <div class="timeline-item">
-        <div class="timeline-item__phase">Wave 2</div>
-        <h3 class="timeline-item__title">Ansem Narrative Binding</h3>
-        <p class="timeline-item__desc">Massive token airdrop to Ansem's public wallet. The community started calling it "Ansem's token." The name became the narrative — and the narrative became the rocket fuel.</p>
+        <div class="timeline-item__phase">Jun 20–25</div>
+        <h3 class="timeline-item__title">Silent Accumulation</h3>
+        <p class="timeline-item__desc">Price hovered below $0.01. Only ~1,340 holders. The narrative was quiet but the foundation was being laid. The name "Ansem" started circulating organically in Solana meme circles.</p>
       </div>
       <div class="timeline-item">
-        <div class="timeline-item__phase">Wave 3</div>
-        <h3 class="timeline-item__title">$7M Airdrop Cascade</h3>
-        <p class="timeline-item__desc">A reported $7M in tokens airdropped to thousands of Solana users. Holder count exploded. FOMO buying kicked in. DEX liquidity went parabolic. The viral loop was complete.</p>
+        <div class="timeline-item__phase">Jun 27–29</div>
+        <h3 class="timeline-item__title">$9.4M Airdrop Ignition</h3>
+        <p class="timeline-item__desc">67.38M tokens (~$9.4M) airdropped to 704 wallets from Ansem-associated addresses. Holder count surged from 1,340 to 25,651. FOMO ignited. Price exploded 540% in a single day.</p>
       </div>
       <div class="timeline-item">
-        <div class="timeline-item__phase">Wave 4</div>
-        <h3 class="timeline-item__title">Exchange Expansion</h3>
-        <p class="timeline-item__desc">PumpSwap, Meteora, MEXC listings followed. Market makers entered. Liquidity deepened. A meme coin went from a pump.fun curve to a multi-exchange traded asset.</p>
+        <div class="timeline-item__phase">Jun 30+</div>
+        <h3 class="timeline-item__title">Exchange Expansion & ATH</h3>
+        <p class="timeline-item__desc">MEXC listed ANSEM/USDT in its "Meme Zone" with zero-fee trading. PumpSwap volume hit $29M/day. ATH reached $0.1519. A meme coin went from a Pump.fun curve to a multi-exchange traded phenomenon.</p>
       </div>
     </div>
   </div>
@@ -1317,25 +1968,210 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
      ============================================ -->
 <section class="section" id="tokenomics" aria-labelledby="tokenomics-title">
   <div class="container">
-    <span class="section__label">Market Data</span>
-    <h2 id="tokenomics-title" class="section__title">Key Metrics</h2>
+    <span class="section__label">Supply</span>
+    <h2 id="tokenomics-title" class="section__title">Tokenomics &<br>Distribution</h2>
+    <p class="section__body">
+      The economics tell a story of extreme concentration. One wallet defines this market.
+    </p>
 
     <div class="tokenomics__grid stagger-children" id="metrics">
       <div class="metric-card">
-        <div class="metric-card__value metric-card__value--accent">$80-120M</div>
-        <div class="metric-card__label">Peak Market Cap</div>
+        <div class="metric-card__value metric-card__value--accent">1,000,000,000</div>
+        <div class="metric-card__label">Total Supply</div>
+        <div class="metric-card__sub">No mint authority</div>
       </div>
       <div class="metric-card">
-        <div class="metric-card__value">$60M+</div>
-        <div class="metric-card__label">24h Trading Volume</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-card__value metric-card__value--accent">$0.12-0.15</div>
-        <div class="metric-card__label">All-Time High</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-card__value">400M+</div>
+        <div class="metric-card__value">~396M</div>
         <div class="metric-card__label">Circulating Supply</div>
+        <div class="metric-card__sub">~39.6% of total</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card__value metric-card__value--accent">$0.1519</div>
+        <div class="metric-card__label">All-Time High</div>
+        <div class="metric-card__sub">Jun 30, 2026</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card__value">$0.0001441</div>
+        <div class="metric-card__label">All-Time Low</div>
+        <div class="metric-card__sub">Jun 25, 2026</div>
+      </div>
+    </div>
+
+    <!-- Holder Concentration -->
+    <div class="section__subheading reveal">Holder Concentration</div>
+    <div class="supply__grid stagger-children">
+      <div class="supply-bar">
+        <div class="supply-bar__label">
+          <span>Ansem Wallet</span>
+          <span class="supply-bar__pct">65%</span>
+        </div>
+        <div class="supply-bar__track">
+          <div class="supply-bar__fill supply-bar__fill--danger" style="--bar-width: 65%;"></div>
+        </div>
+        <p class="supply-bar__desc">~650M tokens. Single largest holder. Can move the entire market with one trade.</p>
+      </div>
+      <div class="supply-bar">
+        <div class="supply-bar__label">
+          <span>Other Top 9 Holders</span>
+          <span class="supply-bar__pct">1.4%</span>
+        </div>
+        <div class="supply-bar__track">
+          <div class="supply-bar__fill supply-bar__fill--warn" style="--bar-width: 1.4%;"></div>
+        </div>
+        <p class="supply-bar__desc">Combined holdings of remaining top-10 addresses beyond Ansem.</p>
+      </div>
+      <div class="supply-bar">
+        <div class="supply-bar__label">
+          <span>All Other Holders (~25K)</span>
+          <span class="supply-bar__pct">33.6%</span>
+        </div>
+        <div class="supply-bar__track">
+          <div class="supply-bar__fill supply-bar__fill--neutral" style="--bar-width: 33.6%;"></div>
+        </div>
+        <p class="supply-bar__desc">Distributed across ~25,651 wallets as of Jun 28. Most hold small amounts from airdrops.</p>
+      </div>
+    </div>
+
+    <div class="tokenomics__note reveal">
+      <strong>Key Insight:</strong> The top 10 addresses collectively control <span style="color: var(--color-accent);">66.4% of total supply</span>. In a typical pump-and-dump structure, early wallets accumulate cheap, KOL narrative ignites retail FOMO, and when the top wallets start selling, liquidity dries up fast.
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     LIQUIDITY & EXCHANGES
+     ============================================ -->
+<section class="section" id="liquidity" aria-labelledby="liquidity-title">
+  <div class="container">
+    <span class="section__label">Trading</span>
+    <h2 id="liquidity-title" class="section__title">Liquidity &<br>Exchanges</h2>
+    <p class="section__body">
+      $ANSEM trades across multiple platforms, but liquidity is dangerously thin relative to its market cap. A large sell order can crash the price instantly.
+    </p>
+
+    <div class="liquidity__table-wrap">
+      <table class="liquidity-table" aria-label="Exchange liquidity comparison">
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Pair</th>
+            <th>±2% Depth</th>
+            <th>24h Volume</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="liquidity-table__platform">PumpSwap</span></td>
+            <td>ANSEM/SOL</td>
+            <td class="liquidity-table__danger">~$26,700</td>
+            <td>~$29M</td>
+            <td><span class="tag tag--dex">DEX</span></td>
+          </tr>
+          <tr>
+            <td><span class="liquidity-table__platform">Raydium</span></td>
+            <td>ANSEM/SOL</td>
+            <td class="liquidity-table__danger">~$1,500</td>
+            <td>Negligible</td>
+            <td><span class="tag tag--dex">DEX CLMM</span></td>
+          </tr>
+          <tr>
+            <td><span class="liquidity-table__platform">Meteora</span></td>
+            <td>ANSEM/SOL</td>
+            <td class="liquidity-table__warn">~$50K–100K</td>
+            <td>$100K–1M</td>
+            <td><span class="tag tag--dex">DEX</span></td>
+          </tr>
+          <tr>
+            <td><span class="liquidity-table__platform">MEXC</span></td>
+            <td>ANSEM/USDT</td>
+            <td class="liquidity-table__muted">Undisclosed</td>
+            <td>Undisclosed</td>
+            <td><span class="tag tag--cex">CEX</span></td>
+          </tr>
+          <tr>
+            <td><span class="liquidity-table__platform">Jupiter</span></td>
+            <td>Aggregator</td>
+            <td class="liquidity-table__muted">Routes to DEXs</td>
+            <td>Variable</td>
+            <td><span class="tag tag--agg">Aggregator</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="liquidity__insight reveal">
+      <div class="liquidity__insight-icon" aria-hidden="true">!</div>
+      <div>
+        <strong class="liquidity__insight-title">Critical Liquidity Warning</strong>
+        <p class="liquidity__insight-text">The volume-to-depth ratio is alarmingly high. PumpSwap handles ~$29M in daily volume with only ~$26,700 in ±2% depth. This means a sell order of just a few thousand dollars can cause significant slippage. The liquidity does not match the market cap — a hallmark of high-risk meme coins.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PRICE HISTORY
+     ============================================ -->
+<section class="section price-history" aria-labelledby="price-title">
+  <div class="container">
+    <span class="section__label">Price Action</span>
+    <h2 id="price-title" class="section__title">Price<br>History</h2>
+    <p class="section__body">
+      From near-zero to a nine-figure market cap in under two weeks. This is the anatomy of a meme coin explosion.
+    </p>
+
+    <div class="price__milestones stagger-children">
+      <div class="price-milestone">
+        <div class="price-milestone__date">Jun 25</div>
+        <div class="price-milestone__price">$0.0001441</div>
+        <div class="price-milestone__label">All-Time Low</div>
+        <div class="price-milestone__dot price-milestone__dot--bottom"></div>
+      </div>
+      <div class="price-milestone">
+        <div class="price-milestone__date">Jun 27</div>
+        <div class="price-milestone__price">~$0.005</div>
+        <div class="price-milestone__label">Airdrop Begins</div>
+        <div class="price-milestone__dot"></div>
+      </div>
+      <div class="price-milestone price-milestone--peak">
+        <div class="price-milestone__date">Jun 28</div>
+        <div class="price-milestone__price">~$0.03</div>
+        <div class="price-milestone__label">Holder Surge 25K+</div>
+        <div class="price-milestone__dot price-milestone__dot--peak"></div>
+      </div>
+      <div class="price-milestone price-milestone--peak">
+        <div class="price-milestone__date">Jun 29</div>
+        <div class="price-milestone__price price-milestone__price--up">+540%</div>
+        <div class="price-milestone__label">Single-Day Surge</div>
+        <div class="price-milestone__dot price-milestone__dot--peak"></div>
+      </div>
+      <div class="price-milestone price-milestone--ath">
+        <div class="price-milestone__date">Jun 30</div>
+        <div class="price-milestone__price price-milestone__price--ath">$0.1519</div>
+        <div class="price-milestone__label">All-Time High</div>
+        <div class="price-milestone__dot price-milestone__dot--ath"></div>
+      </div>
+      <div class="price-milestone">
+        <div class="price-milestone__date">Jul 1</div>
+        <div class="price-milestone__price price-milestone__price--down">~$0.08</div>
+        <div class="price-milestone__label">Correction</div>
+        <div class="price-milestone__dot"></div>
+      </div>
+    </div>
+
+    <div class="price__stats-row reveal">
+      <div class="price-stat">
+        <div class="price-stat__value">1054x</div>
+        <div class="price-stat__label">ATL → ATH Multiple</div>
+      </div>
+      <div class="price-stat">
+        <div class="price-stat__value">5 days</div>
+        <div class="price-stat__label">Time to Peak</div>
+      </div>
+      <div class="price-stat">
+        <div class="price-stat__value">~$61M</div>
+        <div class="price-stat__label">Peak 24h Volume</div>
       </div>
     </div>
   </div>
@@ -1367,35 +2203,121 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <section class="section risk" id="risk" aria-labelledby="risk-title">
   <div class="container">
     <span class="section__label">Important</span>
-    <h2 id="risk-title" class="section__title">Risk<br>Structure</h2>
+    <h2 id="risk-title" class="section__title">Risk<br>Assessment</h2>
+    <div class="risk__score reveal">
+      <div class="risk__score-badge" aria-label="Risk score 10 out of 10">10<span>/10</span></div>
+      <div class="risk__score-label">Extreme Risk</div>
+    </div>
     <p class="section__body">
-      Meme coins carry extreme risk. $ANSEM is no exception. Before you ape in, understand what you're dealing with.
+      $ANSEM scores the maximum on our risk scale. It is a speculative instrument, not an investment. Every dollar put in should be treated as already lost.
     </p>
 
     <div class="risk__grid stagger-children" id="riskCards">
       <div class="risk-card">
+        <div class="risk-card__num">01</div>
         <h3 class="risk-card__title">Extreme Concentration</h3>
-        <p class="risk-card__desc">A single wallet controls a massive portion of supply. Top holders dominate the distribution. One wallet can move the entire market.</p>
+        <p class="risk-card__desc">Ansem's wallet holds <strong>~65% of total supply</strong>. Top 10 addresses control 66.4%. A single sell decision by the largest holder can crash the market instantly. There is no lock-up, no vesting, and no transparency on selling intentions.</p>
       </div>
       <div class="risk-card">
-        <h3 class="risk-card__title">Zero Fundamentals</h3>
-        <p class="risk-card__desc">No protocol revenue. No product. No cash flow. Value is 100% sentiment. When sentiment shifts, price moves with no floor.</p>
+        <div class="risk-card__num">02</div>
+        <h3 class="risk-card__title">Dangerously Thin Liquidity</h3>
+        <p class="risk-card__desc">PumpSwap's ±2% depth is only <strong>~$26,700</strong> despite $29M in daily volume. A sell of just a few thousand dollars causes significant slippage. The liquidity-to-market-cap ratio is one of the worst in the Solana meme ecosystem.</p>
       </div>
       <div class="risk-card">
-        <h3 class="risk-card__title">Classic Pump Structure</h3>
-        <p class="risk-card__desc">Early wallets accumulate cheap. KOL narrative ignites retail FOMO. Liquidity thins. When smart money exits, late entrants hold the bag.</p>
+        <div class="risk-card__num">03</div>
+        <h3 class="risk-card__title">No Fundamental Value</h3>
+        <p class="risk-card__desc">Zero protocol revenue. Zero product. Zero cash flow. No whitepaper. No roadmap. No disclosed team. The token's entire value proposition is <strong>narrative and sentiment</strong>. When the story fades, there is no floor.</p>
       </div>
       <div class="risk-card">
-        <h3 class="risk-card__title">Thin Liquidity</h3>
-        <p class="risk-card__desc">DEX-dominated trading with shallow order books. A significant sell-off can trigger rapid, cascading price declines with limited exit options.</p>
+        <div class="risk-card__num">04</div>
+        <h3 class="risk-card__title">Unverified Smart Contract</h3>
+        <p class="risk-card__desc">The contract was created via Pump.fun with <strong>no third-party audit</strong>. While Pump.fun typically revokes mint authority after deployment, users should independently verify on Solscan. Anonymous teams can embed hidden fees, tax mechanisms, or upgradeable proxies.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-card__num">05</div>
+        <h3 class="risk-card__title">Market Manipulation</h3>
+        <p class="risk-card__desc">On-chain evidence shows price is driven by a <strong>small number of actors</strong>. Ansem's airdrops, coordinated social media campaigns, and exchange listing announcements create artificial demand. The pattern matches classic pump-and-dump structures analyzed by blockchain forensics firms.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-card__num">06</div>
+        <h3 class="risk-card__title">Short Lifespan Risk</h3>
+        <p class="risk-card__desc">Pump.fun meme coins typically have <strong>lifecycles measured in days</strong>. Once liquidity evaporates or social attention shifts to the next meme, these tokens are often abandoned. Historical data shows most similar assets lose 95%+ of value within weeks.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-card__num">07</div>
+        <h3 class="risk-card__title">Regulatory Uncertainty</h3>
+        <p class="risk-card__desc">$ANSEM has <strong>no compliance registration or license</strong>. It lacks KYC/AML measures. Depending on jurisdiction, community-driven meme coins with promotional airdrops could be classified as unregistered securities, exposing holders to legal risks.</p>
+      </div>
+      <div class="risk-card">
+        <div class="risk-card__num">08</div>
+        <h3 class="risk-card__title">Social Media Manipulation</h3>
+        <p class="risk-card__desc">Price is primarily driven by <strong>KOL tweets, airdrop announcements, and FOMO</strong>. The official Twitter account (@BlackBullSol) posts market-hyping content with minimal substantive information. Sentiment can shift in minutes with a single tweet.</p>
       </div>
     </div>
 
-    <div class="risk__disclaimer">
-      <div class="risk__disclaimer-title">Disclaimer</div>
+    <div class="risk__disclaimer reveal">
+      <div class="risk__disclaimer-title">Investment Advisory</div>
       <p class="risk__disclaimer-text">
-        This website is for informational purposes only and does not constitute financial advice. $ANSEM is a high-risk meme asset with extreme volatility. You could lose your entire investment. Always do your own research (DYOR) and never invest more than you can afford to lose. Cryptocurrency investments carry significant risk and may not be suitable for all investors.
+        Based on our comprehensive analysis, $ANSEM scores <strong>10/10 on the risk scale</strong>. It is not recommended for ordinary investors. If you choose to participate despite these warnings, allocate only a tiny fraction of your portfolio (&lt;1%), set strict stop-losses, monitor whale wallet movements in real-time, and be prepared to lose 100% of your capital. This is speculation, not investing.
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     DUE DILIGENCE CHECKLIST
+     ============================================ -->
+<section class="section diligence" aria-labelledby="diligence-title">
+  <div class="container">
+    <span class="section__label">Before You Trade</span>
+    <h2 id="diligence-title" class="section__title">Due Diligence<br>Checklist</h2>
+    <p class="section__body">
+      If you're considering any exposure to $ANSEM, complete this checklist first. These are not optional — they are the minimum for informed participation in a 10/10 risk asset.
+    </p>
+
+    <div class="diligence__list stagger-children">
+      <div class="diligence-item">
+        <div class="diligence-item__check" aria-hidden="true">1</div>
+        <div class="diligence-item__content">
+          <h3 class="diligence-item__title">Verify Mint Authority</h3>
+          <p class="diligence-item__desc">Check <a href="https://solscan.io/token/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noopener" class="diligence-item__link">Solscan</a> to confirm the mint authority field shows "None" — ensuring no new tokens can be minted. Also verify metadata mutability.</p>
+        </div>
+      </div>
+      <div class="diligence-item">
+        <div class="diligence-item__check" aria-hidden="true">2</div>
+        <div class="diligence-item__content">
+          <h3 class="diligence-item__title">Monitor Whale Wallets</h3>
+          <p class="diligence-item__desc">Use chain analysis tools to track Ansem's wallet and the top 10 holder addresses. Set alerts for any large transfers. If Ansem moves tokens to an exchange, expect immediate price impact.</p>
+        </div>
+      </div>
+      <div class="diligence-item">
+        <div class="diligence-item__check" aria-hidden="true">3</div>
+        <div class="diligence-item__content">
+          <h3 class="diligence-item__title">Test Slippage Yourself</h3>
+          <p class="diligence-item__desc">Execute small test orders on PumpSwap, Raydium, and Meteora to measure actual slippage. Compare against the quoted ±2% depth. Real-world slippage is often worse than what aggregators show.</p>
+        </div>
+      </div>
+      <div class="diligence-item">
+        <div class="diligence-item__check" aria-hidden="true">4</div>
+        <div class="diligence-item__content">
+          <h3 class="diligence-item__title">Verify Airdrop Patterns</h3>
+          <p class="diligence-item__desc">Cross-reference airdrop wallet addresses with known distribution events. Watch for patterns where the same addresses receive large allocations and immediately sell — a common sign of coordinated distribution.</p>
+        </div>
+      </div>
+      <div class="diligence-item">
+        <div class="diligence-item__check" aria-hidden="true">5</div>
+        <div class="diligence-item__content">
+          <h3 class="diligence-item__title">Track Social Sentiment</h3>
+          <p class="diligence-item__desc">Monitor <a href="https://x.com/blknoiz06" target="_blank" rel="noopener" class="diligence-item__link">@blknoiz06</a> and <a href="https://x.com/BlackBullSol" target="_blank" rel="noopener" class="diligence-item__link">@BlackBullSol</a> for news. Be skeptical of promotional content. Watch for sudden shifts in tone or reduced posting frequency — these often precede large sell-offs.</p>
+        </div>
+      </div>
+      <div class="diligence-item">
+        <div class="diligence-item__check" aria-hidden="true">6</div>
+        <div class="diligence-item__content">
+          <h3 class="diligence-item__title">Set a Risk Budget</h3>
+          <p class="diligence-item__desc">Decide your maximum loss <em>before</em> entering. Use a hard stop-loss. Never add to a losing position. Never invest more than you can afford to lose completely. This is a 10/10 risk asset — treat it accordingly.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
