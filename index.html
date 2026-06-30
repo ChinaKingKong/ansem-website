@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Black Bull — $ANSEM</title>
+<meta name="description" content="The Black Bull ($ANSEM) — Solana's most aggressive meme asset. Born from chaos. Fueled by narrative. No roadmap. No promises. Just the bull.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/images/logo.jpg" type="image/jpeg">
+
+<style>
+/* ============================================
+   DESIGN TOKEN SYSTEM
+   ============================================ */
+:root {
+  /* Color Tokens — Dark aggressive palette */
+  --color-bg-base: oklch(7% 0.005 84);
+  --color-bg-surface: oklch(12% 0.008 84);
+  --color-bg-elevated: oklch(17% 0.010 84);
+  --color-bg-raised: oklch(22% 0.012 84);
+
+  --color-accent: oklch(70% 0.16 82);
+  --color-accent-light: oklch(82% 0.12 82);
+  --color-accent-dark: oklch(55% 0.15 82);
+  --color-accent-muted: oklch(45% 0.08 82);
+
+  --color-danger: oklch(48% 0.18 25);
+  --color-danger-light: oklch(60% 0.16 25);
+
+  --color-text-primary: oklch(92% 0.01 84);
+  --color-text-secondary: oklch(70% 0.02 84);
+  --color-text-muted: oklch(50% 0.02 84);
+  --color-text-inverse: oklch(8% 0.01 84);
+
+  --color-border: oklch(25% 0.01 84);
+  --color-border-light: oklch(18% 0.01 84);
+
+  /* Typography */
+  --font-display: 'Oswald', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  --font-size-hero: clamp(4rem, 9vw, 8rem);
+  --font-size-h1: clamp(2.5rem, 5vw, 4rem);
+  --font-size-h2: clamp(2rem, 3.5vw, 3rem);
+  --font-size-h3: clamp(1.25rem, 2vw, 1.75rem);
+  --font-size-body: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-xs: 0.75rem;
+  --font-size-caption: 0.8125rem;
+
+  /* Spacing — 4px base */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+  --shadow-glow: 0 0 60px oklch(70% 0.16 82 / 0.15);
+  --shadow-glow-danger: 0 0 40px oklch(48% 0.18 25 / 0.2);
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 700ms;
+
+  /* Layout */
+  --container-max: 1280px;
+  --content-max: 720px;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-base);
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+::selection {
+  background: oklch(70% 0.16 82 / 0.3);
+  color: var(--color-text-primary);
+}
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding-block: var(--space-4);
+  transition: background var(--duration-normal) var(--ease-out-quart),
+              backdrop-filter var(--duration-normal) var(--ease-out-quart);
+}
+.nav--scrolled {
+  background: oklch(8% 0.005 84 / 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+
+.nav__logo-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-elevated);
+  border: 2px solid var(--color-accent-muted);
+  box-shadow: 0 0 12px oklch(70% 0.16 82 / 0.2);
+}
+
+.nav__logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  list-style: none;
+}
+
+.nav__link {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color var(--duration-fast);
+  position: relative;
+}
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--color-accent);
+  transition: width var(--duration-normal) var(--ease-out-expo);
+}
+.nav__link:hover { color: var(--color-text-primary); }
+.nav__link:hover::after { width: 100%; }
+
+.nav__cta {
+  padding: var(--space-2) var(--space-5);
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+  transition: background var(--duration-fast),
+              transform var(--duration-fast),
+              box-shadow var(--duration-fast);
+}
+.nav__cta:hover {
+  background: var(--color-accent-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Mobile nav */
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-2);
+}
+.nav__toggle span {
+  width: 24px; height: 2px;
+  background: var(--color-text-primary);
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+              opacity var(--duration-fast);
+}
+.nav__toggle--active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.nav__toggle--active span:nth-child(2) { opacity: 0; }
+.nav__toggle--active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+@media (max-width: 768px) {
+  .nav__links {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--color-bg-base);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-normal);
+    gap: var(--space-8);
+  }
+  .nav__links--open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav__link { font-size: var(--font-size-h3); }
+  .nav__toggle { display: flex; position: relative; z-index: 101; }
+  .nav__cta { display: none; }
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--space-32) var(--space-20);
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__bg-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 20%, oklch(70% 0.16 82 / 0.06), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 70% 80%, oklch(48% 0.18 25 / 0.04), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, oklch(70% 0.16 82 / 0.03), transparent 60%);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-4);
+  background: oklch(25% 0.01 84 / 0.5);
+  border: 1px solid var(--color-border);
+  border-radius: 100px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-6);
+}
+
+.hero__badge-dot {
+  width: 6px; height: 6px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-hero);
+  font-weight: 700;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.hero__title-accent {
+  display: block;
+  color: var(--color-accent);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  letter-spacing: 0.15em;
+  margin-top: var(--space-2);
+}
+
+.hero__subtitle {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  color: var(--color-text-secondary);
+  max-width: 48ch;
+  margin-bottom: var(--space-8);
+  line-height: 1.6;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-8);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 4px;
+  transition: all var(--duration-fast) var(--ease-out-quart);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+}
+.btn--primary:hover {
+  background: var(--color-accent-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn--outline {
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+.btn--outline:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.hero__visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__emblem {
+  width: min(340px, 70vw);
+  height: min(340px, 70vw);
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+/* Spinning conic-gradient border ring */
+.hero__emblem::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--color-accent),
+    oklch(45% 0.08 82 / 0.6),
+    var(--color-accent),
+    oklch(30% 0.05 82 / 0.3),
+    var(--color-accent)
+  );
+  animation: orbit 8s linear infinite;
+  z-index: 0;
+  filter: blur(2px);
+  opacity: 0.8;
+}
+
+/* Inner solid ring for clean edge */
+.hero__emblem::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: oklch(10% 0.005 84);
+  z-index: 0;
+}
+
+.hero__emblem-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+  z-index: 1;
+  animation: orbit 30s linear infinite reverse;
+}
+
+.hero__emblem-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, transparent 40%, oklch(12% 0.008 84 / 0.85) 85%);
+  z-index: 2;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero__emblem-orbital {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 1.5px solid oklch(70% 0.16 82 / 0.25);
+  animation: orbit 20s linear infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+.hero__emblem-orbital:nth-child(3) {
+  inset: -26px;
+  animation-duration: 28s;
+  animation-direction: reverse;
+  border-color: oklch(70% 0.16 82 / 0.2);
+}
+.hero__emblem-orbital:nth-child(4) {
+  inset: -42px;
+  animation-duration: 35s;
+  border-color: oklch(70% 0.16 82 / 0.12);
+  border-style: dashed;
+  border-width: 1.2px;
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero__stats {
+  display: flex;
+  gap: var(--space-8);
+  margin-top: var(--space-12);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.hero__stat-value {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+}
+.hero__stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: var(--space-1);
+}
+
+@media (max-width: 768px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .hero { padding-block: var(--space-24) var(--space-12); }
+  .hero__visual { order: -1; }
+  .hero__emblem {
+    width: min(260px, 70vw);
+    height: min(260px, 70vw);
+  }
+  .hero__stats { gap: var(--space-6); }
+}
+
+/* ============================================
+   SECTION COMMONS
+   ============================================ */
+.section {
+  padding-block: var(--space-24);
+  position: relative;
+}
+
+.section__label {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-4);
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h2);
+  font-weight: 600;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.section__body {
+  max-width: var(--content-max);
+  font-size: var(--font-size-body);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   WHAT IS SECTION
+   ============================================ */
+.what-is {
+  position: relative;
+}
+
+.what-is__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+.what-is__visual {
+  position: sticky;
+  top: var(--space-24);
+}
+
+.what-is__card-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.feature-card {
+  padding: var(--space-6);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-light);
+  border-left: 3px solid var(--color-accent);
+  transition: border-color var(--duration-normal),
+              background var(--duration-normal);
+}
+.feature-card:hover {
+  background: var(--color-bg-elevated);
+  border-left-color: var(--color-accent-light);
+}
+
+.feature-card__icon {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-3);
+  color: var(--color-accent);
+  font-family: var(--font-display);
+}
+
+.feature-card__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.feature-card__desc {
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 48ch;
+}
+
+@media (max-width: 768px) {
+  .what-is__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .what-is__visual { position: static; }
+}
+
+/* ============================================
+   THE NAME SECTION
+   ============================================ */
+.the-name {
+  position: relative;
+  overflow: hidden;
+}
+
+.the-name__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 80% 50%, oklch(70% 0.16 82 / 0.03), transparent 70%);
+  pointer-events: none;
+}
+
+.the-name__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  align-items: center;
+  margin-top: var(--space-10);
+  max-width: 72ch;
+}
+
+.the-name__handle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 100px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-accent-light);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all var(--duration-fast);
+  cursor: pointer;
+}
+.the-name__handle:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-4);
+}
+
+.the-name__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h2);
+  font-weight: 600;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.the-name__body {
+  font-size: var(--font-size-body);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+  max-width: 54ch;
+}
+
+.the-name__note {
+  padding: var(--space-4);
+  background: oklch(70% 0.16 82 / 0.06);
+  border-left: 3px solid var(--color-accent);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 54ch;
+}
+
+.the-name__note strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .the-name__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}
+
+/* ============================================
+   STORY / NARRATIVE SECTION
+   ============================================ */
+.narrative {
+  background: var(--color-bg-surface);
+  position: relative;
+  overflow: hidden;
+}
+
+.narrative::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-accent-muted), transparent);
+}
+
+.narrative__timeline {
+  margin-top: var(--space-12);
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.narrative__timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: var(--color-border);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: var(--space-10);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--space-8) * -1);
+  top: var(--space-1);
+  width: 10px; height: 10px;
+  background: var(--color-bg-surface);
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.timeline-item__phase {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-1);
+  text-transform: uppercase;
+}
+
+.timeline-item__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-bottom: var(--space-2);
+}
+
+.timeline-item__desc {
+  font-size: var(--font-size-sm);
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  max-width: 56ch;
+}
+
+/* ============================================
+   TOKENOMICS
+   ============================================ */
+.tokenomics__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.metric-card {
+  padding: var(--space-6);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-light);
+  text-align: center;
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+              box-shadow var(--duration-normal);
+}
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.metric-card__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+}
+.metric-card__value--accent {
+  color: var(--color-accent);
+}
+
+.metric-card__label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .tokenomics__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================
+   FORMULA SECTION
+   ============================================ */
+.formula {
+  background: var(--color-bg-surface);
+  text-align: center;
+  position: relative;
+}
+
+.formula__equation {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--color-text-secondary);
+  padding: var(--space-8);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-light);
+  max-width: 900px;
+  margin-inline: auto;
+  margin-top: var(--space-8);
+  line-height: 1.8;
+}
+
+.formula__highlight {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* ============================================
+   RISK SECTION
+   ============================================ */
+.risk {
+  position: relative;
+  overflow: hidden;
+}
+
+.risk::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 80% 50%, oklch(48% 0.18 25 / 0.05), transparent 70%);
+  pointer-events: none;
+}
+
+.risk__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.risk-card {
+  padding: var(--space-6);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-light);
+  border-top: 3px solid var(--color-danger);
+  transition: border-color var(--duration-normal);
+}
+.risk-card:hover {
+  border-top-color: var(--color-danger-light);
+}
+
+.risk-card__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  color: var(--color-danger-light);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-2);
+}
+
+.risk-card__desc {
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.risk__disclaimer {
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  background: oklch(48% 0.18 25 / 0.08);
+  border: 1px solid oklch(48% 0.18 25 / 0.2);
+  border-radius: 4px;
+}
+
+.risk__disclaimer-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-danger-light);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+}
+
+.risk__disclaimer-text {
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+  .risk__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   COMMUNITY / CTA
+   ============================================ */
+.community {
+  background: var(--color-bg-surface);
+  text-align: center;
+  position: relative;
+}
+
+.community__cta-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.community__dexs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.dex-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-5);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-light);
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  transition: all var(--duration-fast);
+  cursor: pointer;
+}
+.dex-badge:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: oklch(20% 0.02 84 / 0.5);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  padding-block: var(--space-8);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.footer__copy {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.footer__links {
+  display: flex;
+  gap: var(--space-6);
+  list-style: none;
+}
+
+.footer__link {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast);
+}
+.footer__link:hover {
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity var(--duration-slow) var(--ease-out-expo),
+              transform var(--duration-slow) var(--ease-out-expo);
+}
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal--delay-1 { transition-delay: 0.1s; }
+.reveal--delay-2 { transition-delay: 0.2s; }
+.reveal--delay-3 { transition-delay: 0.3s; }
+.reveal--delay-4 { transition-delay: 0.4s; }
+
+/* stagger children */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s var(--ease-out-expo),
+              transform 0.6s var(--ease-out-expo);
+}
+.stagger-children--visible > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+.stagger-children--visible > *:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+.stagger-children--visible > *:nth-child(3) { transition-delay: 0.25s; opacity: 1; transform: translateY(0); }
+.stagger-children--visible > *:nth-child(4) { transition-delay: 0.35s; opacity: 1; transform: translateY(0); }
+.stagger-children--visible > *:nth-child(5) { transition-delay: 0.45s; opacity: 1; transform: translateY(0); }
+.stagger-children--visible > *:nth-child(6) { transition-delay: 0.55s; opacity: 1; transform: translateY(0); }
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .stagger-children > * {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================
+   PARTICLE CANVAS
+   ============================================ */
+#particles-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+<!-- ============================================
+     NAVIGATION
+     ============================================ -->
+<nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="#" class="nav__logo" aria-label="ANSEM Home">
+      <div class="nav__logo-icon">
+        <img src="assets/images/logo.jpg" alt="The Black Bull logo" width="36" height="36" loading="eager" decoding="async">
+      </div>
+      $ANSEM
+    </a>
+    <ul class="nav__links" id="navLinks" role="menubar">
+      <li role="none"><a href="#what-is" class="nav__link" role="menuitem">What Is</a></li>
+      <li role="none"><a href="#the-name" class="nav__link" role="menuitem">The Name</a></li>
+      <li role="none"><a href="#story" class="nav__link" role="menuitem">Story</a></li>
+      <li role="none"><a href="#tokenomics" class="nav__link" role="menuitem">Tokenomics</a></li>
+      <li role="none"><a href="#risk" class="nav__link" role="menuitem">Risk</a></li>
+      <li role="none"><a href="#community" class="nav__link nav__cta" role="menuitem">Buy $ANSEM</a></li>
+    </ul>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<header class="hero" id="hero">
+  <div class="hero__bg">
+    <div class="hero__bg-gradient"></div>
+  </div>
+  <div class="hero__content container">
+    <div class="hero__grid">
+      <div>
+        <div class="hero__badge reveal" aria-hidden="true">
+          <span class="hero__badge-dot"></span>
+          Solana Meme Asset
+        </div>
+        <h1 class="hero__title reveal reveal--delay-1">
+          The Black
+          <span class="hero__title-accent">Bull</span>
+        </h1>
+        <p class="hero__subtitle reveal reveal--delay-2">
+          Born from chaos. Fueled by narrative. No roadmap. No promises.<br>
+          Just the raw, unapologetic energy of the market.
+        </p>
+        <div class="hero__actions reveal reveal--delay-3">
+          <a href="https://www.mexc.com/exchange/ANSEM_USDT?shareCode=mexc-1498JGIo" class="btn btn--primary" target="_blank" rel="noopener">Trade $ANSEM</a>
+          <a href="#what-is" class="btn btn--outline">Learn More</a>
+        </div>
+        <div class="hero__stats reveal reveal--delay-4">
+          <div>
+            <div class="hero__stat-value">$80M+</div>
+            <div class="hero__stat-label">Peak Market Cap</div>
+          </div>
+          <div>
+            <div class="hero__stat-value">$60M+</div>
+            <div class="hero__stat-label">24h Volume</div>
+          </div>
+          <div>
+            <div class="hero__stat-value">600x</div>
+            <div class="hero__stat-label">Peak Growth</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero__visual reveal reveal--delay-1">
+        <div class="hero__emblem" aria-hidden="true">
+          <img src="assets/images/ansem-avatar-crop.jpg" alt="" class="hero__emblem-bg" width="340" height="340" loading="eager" decoding="async">
+          <div class="hero__emblem-overlay"></div>
+          <div class="hero__emblem-orbital"></div>
+          <div class="hero__emblem-orbital"></div>
+          <div class="hero__emblem-orbital"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================
+     WHAT IS
+     ============================================ -->
+<section class="section what-is" id="what-is" aria-labelledby="what-is-title">
+  <div class="container">
+    <div class="what-is__grid">
+      <div class="what-is__visual">
+        <span class="section__label">Understanding</span>
+        <h2 id="what-is-title" class="section__title">What Is<br>$ANSEM?</h2>
+        <p class="section__body">
+          $ANSEM is not a protocol. It's not a platform. It's a meme coin on Solana — pure social energy crystallized into a token. Born through Pump.fun, it embodies the spirit of a bull market that refuses to be tamed.
+        </p>
+      </div>
+      <div class="what-is__card-list stagger-children" id="whatIsCards">
+        <article class="feature-card">
+          <div class="feature-card__icon">01</div>
+          <h3 class="feature-card__title">Pure Meme Energy</h3>
+          <p class="feature-card__desc">No product roadmap. No protocol revenue. No cash flow. Just the raw, unbridled energy of crypto culture on Solana.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-card__icon">02</div>
+          <h3 class="feature-card__title">Narrative-Driven Asset</h3>
+          <p class="feature-card__desc">A composite of name, emotion, on-chain airdrops, and meme narrative — a social asset that lives and dies by community sentiment.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-card__icon">03</div>
+          <h3 class="feature-card__title">KOL Amplification</h3>
+          <p class="feature-card__desc">Named after Ansem (<a href="https://x.com/blknoiz06" target="_blank" rel="noopener" style="color: var(--color-accent); text-decoration: none;">@blknoiz06</a>), a legendary Solana trader and narrative driver. The community embraced it — the market followed.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-card__icon">04</div>
+          <h3 class="feature-card__title">Community Owned</h3>
+          <p class="feature-card__desc">Not officially launched by Ansem. An anonymous dev created it, airdropped tokens to his wallet, and the community adopted it as their own.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     THE NAME
+     ============================================ -->
+<section class="section the-name" id="the-name" aria-labelledby="the-name-title">
+  <div class="the-name__bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="the-name__grid">
+      <div class="the-name__content reveal">
+        <a href="https://x.com/blknoiz06" class="the-name__handle" target="_blank" rel="noopener">@blknoiz06</a>
+        <h2 id="the-name-title" class="the-name__title">The Name<br>Behind The Bull</h2>
+        <p class="the-name__body">
+          Ansem is one of Solana's best-known crypto traders and narrative drivers. He's built a reputation for calling Solana meme cycles early and moving markets with his commentary.
+        </p>
+        <p class="the-name__body">
+          $ANSEM is named in reference to him — but it's important to be clear: <strong style="color: var(--color-text-primary);">this is not an official token launched by Ansem</strong>. It was created by an anonymous developer, who airdropped a large portion of the supply to his public wallet. The community took the name and ran with it.
+        </p>
+        <div class="the-name__note">
+          <strong>Community Narrative, Not Endorsement</strong><br>
+          The token's value comes from the story the market built around the name — not from any backing, approval, or participation by Ansem himself.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     STORY / TIMELINE
+     ============================================ -->
+<section class="section narrative" id="story" aria-labelledby="story-title">
+  <div class="container">
+    <span class="section__label">The Rise</span>
+    <h2 id="story-title" class="section__title">Why It<br>Exploded 600x</h2>
+    <p class="section__body">
+      Understanding $ANSEM means understanding the perfect storm of Solana meme culture, celebrity narrative, and liquidity cascades that turned a pump.fun launch into a cultural phenomenon.
+    </p>
+
+    <div class="narrative__timeline stagger-children" id="timeline">
+      <div class="timeline-item">
+        <div class="timeline-item__phase">Wave 1</div>
+        <h3 class="timeline-item__title">Pump.fun Launch</h3>
+        <p class="timeline-item__desc">Launched during Solana's meme coin seasonal explosion. Sniper bots and early liquidity rushed in. A standard meme coin birth — but this one had a name that stuck.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-item__phase">Wave 2</div>
+        <h3 class="timeline-item__title">Ansem Narrative Binding</h3>
+        <p class="timeline-item__desc">Massive token airdrop to Ansem's public wallet. The community started calling it "Ansem's token." The name became the narrative — and the narrative became the rocket fuel.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-item__phase">Wave 3</div>
+        <h3 class="timeline-item__title">$7M Airdrop Cascade</h3>
+        <p class="timeline-item__desc">A reported $7M in tokens airdropped to thousands of Solana users. Holder count exploded. FOMO buying kicked in. DEX liquidity went parabolic. The viral loop was complete.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-item__phase">Wave 4</div>
+        <h3 class="timeline-item__title">Exchange Expansion</h3>
+        <p class="timeline-item__desc">PumpSwap, Meteora, MEXC listings followed. Market makers entered. Liquidity deepened. A meme coin went from a pump.fun curve to a multi-exchange traded asset.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TOKENOMICS
+     ============================================ -->
+<section class="section" id="tokenomics" aria-labelledby="tokenomics-title">
+  <div class="container">
+    <span class="section__label">Market Data</span>
+    <h2 id="tokenomics-title" class="section__title">Key Metrics</h2>
+
+    <div class="tokenomics__grid stagger-children" id="metrics">
+      <div class="metric-card">
+        <div class="metric-card__value metric-card__value--accent">$80-120M</div>
+        <div class="metric-card__label">Peak Market Cap</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card__value">$60M+</div>
+        <div class="metric-card__label">24h Trading Volume</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card__value metric-card__value--accent">$0.12-0.15</div>
+        <div class="metric-card__label">All-Time High</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card__value">400M+</div>
+        <div class="metric-card__label">Circulating Supply</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FORMULA
+     ============================================ -->
+<section class="section formula" aria-labelledby="formula-title">
+  <div class="container">
+    <span class="section__label">The Equation</span>
+    <h2 id="formula-title" class="section__title">The Drive<br>Formula</h2>
+    <p class="section__body" style="margin-inline: auto; text-align: center;">
+      $ANSEM isn't a "project" in the traditional sense. It's a compound asset driven by a formula of social forces.
+    </p>
+    <div class="formula__equation">
+      <span class="formula__highlight">ANSEM</span> &nbsp;=&nbsp;
+      <span class="formula__highlight">KOL Influence</span> &nbsp;×&nbsp;
+      <span class="formula__highlight">Airdrop Stimulus</span> &nbsp;×&nbsp;
+      <span class="formula__highlight">Solana Meme Heat</span> &nbsp;×&nbsp;
+      <span class="formula__highlight">Low Liquidity Leverage</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     RISK
+     ============================================ -->
+<section class="section risk" id="risk" aria-labelledby="risk-title">
+  <div class="container">
+    <span class="section__label">Important</span>
+    <h2 id="risk-title" class="section__title">Risk<br>Structure</h2>
+    <p class="section__body">
+      Meme coins carry extreme risk. $ANSEM is no exception. Before you ape in, understand what you're dealing with.
+    </p>
+
+    <div class="risk__grid stagger-children" id="riskCards">
+      <div class="risk-card">
+        <h3 class="risk-card__title">Extreme Concentration</h3>
+        <p class="risk-card__desc">A single wallet controls a massive portion of supply. Top holders dominate the distribution. One wallet can move the entire market.</p>
+      </div>
+      <div class="risk-card">
+        <h3 class="risk-card__title">Zero Fundamentals</h3>
+        <p class="risk-card__desc">No protocol revenue. No product. No cash flow. Value is 100% sentiment. When sentiment shifts, price moves with no floor.</p>
+      </div>
+      <div class="risk-card">
+        <h3 class="risk-card__title">Classic Pump Structure</h3>
+        <p class="risk-card__desc">Early wallets accumulate cheap. KOL narrative ignites retail FOMO. Liquidity thins. When smart money exits, late entrants hold the bag.</p>
+      </div>
+      <div class="risk-card">
+        <h3 class="risk-card__title">Thin Liquidity</h3>
+        <p class="risk-card__desc">DEX-dominated trading with shallow order books. A significant sell-off can trigger rapid, cascading price declines with limited exit options.</p>
+      </div>
+    </div>
+
+    <div class="risk__disclaimer">
+      <div class="risk__disclaimer-title">Disclaimer</div>
+      <p class="risk__disclaimer-text">
+        This website is for informational purposes only and does not constitute financial advice. $ANSEM is a high-risk meme asset with extreme volatility. You could lose your entire investment. Always do your own research (DYOR) and never invest more than you can afford to lose. Cryptocurrency investments carry significant risk and may not be suitable for all investors.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     COMMUNITY / CTA
+     ============================================ -->
+<section class="section community" id="community" aria-labelledby="community-title">
+  <div class="container">
+    <span class="section__label">Join The Herd</span>
+    <h2 id="community-title" class="section__title">Ready to<br>Run?</h2>
+    <p class="section__body" style="margin-inline: auto; text-align: center; max-width: 56ch;">
+      The Black Bull doesn't wait. Join the thousands of traders riding the Solana meme wave. But remember — the bull can turn at any moment.
+    </p>
+    <div class="community__cta-group">
+      <a href="https://www.mexc.com/exchange/ANSEM_USDT?shareCode=mexc-1498JGIo" class="btn btn--primary" style="font-size: 1rem; padding: var(--space-4) var(--space-12);" target="_blank" rel="noopener">
+        Trade $ANSEM Now
+      </a>
+    </div>
+    <div class="community__dexs" aria-label="Available exchanges">
+      <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" class="dex-badge" target="_blank" rel="noopener">PumpSwap</a>
+      <a href="https://raydium.io/swap/?inputCurrency=9crcn9rgt8v2imem2baks13yhmeais3rum3rpvtgpump&outputCurrency=so11111111111111111111111111111111111111112&referrer=6tvwZLkMWj9qZNu8YoquKNde8RJXk1fofgaAyJkWMC5f&inputMint=sol&outputMint=9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" class="dex-badge" target="_blank" rel="noopener">Raydium</a>
+      <a href="https://jup.ag/tokens/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" class="dex-badge" target="_blank" rel="noopener">Jupiter</a>
+      <a href="https://www.mexc.com/exchange/ANSEM_USDT?shareCode=mexc-1498JGIo" class="dex-badge" target="_blank" rel="noopener">MEXC</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner">
+    <p class="footer__copy">2026 The Black Bull. This is a meme. DYOR. NFA.</p>
+    <ul class="footer__links">
+      <li><a href="https://x.com/blknoiz06" class="footer__link" target="_blank" rel="noopener">Twitter / X</a></li>
+      <li><a href="https://www.coingecko.com/en/coins/the-black-bull" class="footer__link" target="_blank" rel="noopener">CoinGecko</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- ============================================
+     SCRIPTS
+     ============================================ -->
+<script>
+/* ============================================
+   PARTICLE SYSTEM
+   ============================================ */
+(function() {
+  const canvas = document.getElementById('particles-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animationId;
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4;
+      this.size = Math.random() * 1.5 + 0.5;
+      this.opacity = Math.random() * 0.4 + 0.1;
+    }
+
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+
+      // Wrap around edges
+      if (this.x < -10) this.x = canvas.width + 10;
+      if (this.x > canvas.width + 10) this.x = -10;
+      if (this.y < -10) this.y = canvas.height + 10;
+      if (this.y > canvas.height + 10) this.y = -10;
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(212, 168, 64, ${this.opacity})`;
+      ctx.fill();
+    }
+  }
+
+  function init() {
+    const count = isReducedMotion ? 20 : window.innerWidth < 768 ? 40 : 80;
+    particles = Array.from({ length: count }, () => new Particle());
+  }
+
+  function drawConnections() {
+    if (isReducedMotion || window.innerWidth < 768) return;
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          const opacity = (1 - dist / 120) * 0.08;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(212, 168, 64, ${opacity})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (const p of particles) {
+      p.update();
+      p.draw();
+    }
+    drawConnections();
+
+    animationId = requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', () => {
+    resize();
+    init();
+  });
+
+  resize();
+  init();
+  if (!isReducedMotion) {
+    animate();
+  }
+})();
+
+/* ============================================
+   NAVIGATION SCROLL EFFECT
+   ============================================ */
+(function() {
+  const nav = document.getElementById('nav');
+  let ticking = false;
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if (window.scrollY > 50) {
+          nav.classList.add('nav--scrolled');
+        } else {
+          nav.classList.remove('nav--scrolled');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ============================================
+   MOBILE NAV TOGGLE
+   ============================================ */
+(function() {
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+
+  toggle.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('nav__links--open');
+    toggle.classList.toggle('nav__toggle--active');
+    toggle.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close on link click
+  links.querySelectorAll('.nav__link').forEach(link => {
+    link.addEventListener('click', () => {
+      links.classList.remove('nav__links--open');
+      toggle.classList.remove('nav__toggle--active');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+})();
+
+/* ============================================
+   SCROLL REVEAL (Intersection Observer)
+   ============================================ */
+(function() {
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (isReducedMotion) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (entry.target.classList.contains('stagger-children')) {
+          entry.target.classList.add('stagger-children--visible');
+        } else {
+          entry.target.classList.add('reveal--visible');
+        }
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  document.querySelectorAll('.reveal, .stagger-children').forEach(el => {
+    observer.observe(el);
+  });
+})();
+
+/* ============================================
+   SMOOTH ANCHOR SCROLL (offset for fixed nav)
+   ============================================ */
+(function() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const headerOffset = 80;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
